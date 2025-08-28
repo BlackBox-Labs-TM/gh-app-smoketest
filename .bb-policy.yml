@@ -5,7 +5,7 @@ checks:
     type: file_exists
     file: README.md
   - id: ban-unsafe-import
-    description: Disallow "from typing import *"
+    description: Dis allow "from typing import *"
     type: regex
     path: "src/**/*.py"
     pattern: "\\bfrom\\s+typing\\s+import\\s+\\*"
