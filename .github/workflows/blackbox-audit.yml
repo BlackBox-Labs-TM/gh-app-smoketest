@@ -19,7 +19,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script:
-            core.setOutput('jwt', await github.actions.getIDToken())
+            core.setOutput('jwt', await github.actions.getIdToken())
       - name: Call server
         run: |
           curl -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
