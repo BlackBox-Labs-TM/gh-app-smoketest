@@ -19,9 +19,9 @@ jobs:
         uses: actions/github-script@v7
         with:
           script:
-            core.setOutput('jwt', await github.actoins.getIdToken())
+            core.setOutput('jwt', await github.actions.getIDToken())
       - name: Call server
         run: |
           curl -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
                -X POST https://blackbox-labs.org/audit \
-               -d "{\"repo\":\"${{ github.repository }}\", \"branch\":\"${{ github.events.inputs.branch }}\"}"
+               -d "{\"repo\":\"${{ github.repository }}\", \"branch\":\"${{ github.event.inputs.branch }}\"}"
