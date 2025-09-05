@@ -1,0 +1,25 @@
+name: Blackbox Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to audit'
+        required: true
+        default: 'main'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get OIDC token
+        id: get-token
+        uses: actions/github-script@v7
+        with:
+          script:
+            core.setOutput('jwt', await github.actoins.getIdToken())
+      - name: Call server
+        run: |
+          curl -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
+               -X POST https://blackbox-labs.org/audit \
+               -d "{\"repo\":\"${{ github.repository }}\", \"branch\":\"${{ github.events.inputs.branch }}\"}"
