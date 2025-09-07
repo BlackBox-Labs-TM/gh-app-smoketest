@@ -21,9 +21,9 @@ jobs:
                      "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
          echo "jwt=$JWT" >> $GITHUB_OUTPUT
 
-         - name: Call server
-           run: |
-             curl -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
+     - name: Call server
+       run: |
+         curl -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
                   -X POST https://blackbox-labs.org/audit \
                   -d "{\"repo\":\"${{ github.repository }}\", \"branch\":\"${{ github.event.inputs.branch }}\"}"
 
