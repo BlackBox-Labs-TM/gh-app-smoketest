@@ -25,5 +25,5 @@ jobs:
        run: |
          curl -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
                   -X POST https://blackbox-labs.org/audit \
-                  -d "{\"repo\":\"${{ github.repository }}\", \"branch\":\"${{ github.event.inputs.branch }}\"}"
+                  -d "{\"branch\":\"${{ github.ref_name }}\"}"
 
