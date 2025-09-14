@@ -1,5 +1,5 @@
 version: 1
-checks:
+rules:
   - id: require-readme
     description: Ensure README exists in repo root
     type: file_exists
