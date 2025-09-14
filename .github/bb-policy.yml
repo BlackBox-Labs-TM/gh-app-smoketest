@@ -1,0 +1,22 @@
+version: 1
+policy:
+  name: "Smoketest Repo Policy"
+  description: "Overrides org-wide policy for this repo."
+
+rules:
+  - id: no-todo
+    description: "Disallow TODO comments in code."
+    languages: ["*"]
+    severity: medium
+
+  - id: no-debug-print
+    description: "Disallow debug print statements."
+    languages: ["python", "java"]
+    patterns:
+      - "print("
+      - "System.out.println"
+    severity: low
+
+settings:
+  block_on_high_severity: true
+  allow_overrides: false
