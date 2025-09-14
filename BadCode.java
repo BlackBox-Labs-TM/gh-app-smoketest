@@ -1,6 +1,6 @@
 public class BadCode {
     public static void main(String[] args) {
-        // TODO: cleanup
+        // TODO: remove debug
         System.out.println("Debugging java...");
     }
 }
