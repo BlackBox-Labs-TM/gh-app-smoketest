@@ -1,22 +1,18 @@
 version: 1
 policy:
   name: "Smoketest Repo Policy"
-  description: "Overrides org-wide policy for this repo."
+  description: "Rules for testing BB Bot"
 
 rules:
-  - id: no-todo
-    description: "Disallow TODO comments in code."
-    languages: ["*"]
-    severity: medium
+  - id: require-readme
+    description: "Ensure README exists in repo root"
+    type: file-exists
+    path: "README.md"
+    severity: high
 
-  - id: no-debug-print
-    description: "Disallow debug print statements."
-    languages: ["python", "java"]
+  - id: ban-unsafe-import
+    description: "Disallow 'from typing import *'"
+    languages: ["python"]
     patterns:
-      - "print("
-      - "System.out.println"
-    severity: low
-
-settings:
-  block_on_high_severity: true
-  allow_overrides: false
+      - "\\bfrom\\s+typing\\s+import\\s+\\*"
+    severity: medium
