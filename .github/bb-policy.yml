@@ -1,17 +1,14 @@
 version: 1
-policy:
-  name: "Smoketest Repo Policy"
-  description: "Rules for testing BB Bot"
-
 rules:
   - id: require-readme
-    description: "Ensure README exists in repo root"
+    description: Ensure README exists in repo root
     type: file-exists
-    path: "README.md"
+    path: README.md
     severity: high
 
   - id: ban-unsafe-import
-    description: "Disallow 'from typing import *'"
+    description: Disallow "from typing import *"
+    type: regex
     languages: ["python"]
     patterns:
       - "\\bfrom\\s+typing\\s+import\\s+\\*"
