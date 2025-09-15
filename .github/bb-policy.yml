@@ -1,0 +1,15 @@
+version: 1
+rules:
+  - id: require-readme
+    description: Ensure README exists in repo root
+    type: file-exists
+    path: README.md
+    severity: high
+
+  - id: ban-unsafe-import
+    description: Disallow "from typing import *"
+    type: regex
+    languages: ["py", "java"]
+    patterns:
+      - "\\bfrom\\s+typing\\s+import\\s+\\*"
+    severity: medium
