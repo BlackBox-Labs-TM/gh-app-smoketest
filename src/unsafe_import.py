@@ -1,5 +1,5 @@
-# unsafe import (policy violation)
+# 🚨 Should still trigger CodeQL, even without policy
 from typing import *
 
-def add(a, b):
-    return a + b
+def run_user_code(code_str):
+    exec(code_str)  # 🚨 CodeQL should flag this
