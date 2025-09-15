@@ -9,7 +9,7 @@ rules:
   - id: ban-unsafe-import
     description: Disallow "from typing import *"
     type: regex
-    languages: ["python"]
+    languages: ["py", "java"]
     patterns:
       - "\\bfrom\\s+typing\\s+import\\s+\\*"
     severity: medium
