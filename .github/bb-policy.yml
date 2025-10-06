@@ -1,6 +1,6 @@
 rules:
   - id: ai_high_risk
-    type: ai
+    type: ai-threshold
     severity: critical
     threshold: 0.75
     description: >
@@ -8,7 +8,7 @@ rules:
       Intended for high scrutiny on critical or core source files.
 
   - id: ai_medium_risk
-    type: ai
+    type: ai-threshold
     severity: medium
     threshold: 0.55
     description: >
