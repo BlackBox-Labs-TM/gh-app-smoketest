@@ -1,17 +1,70 @@
-version: 1
 rules:
-  - id: ban-unsafe-import
-    description: Disallow "from typing import *"
-    type: regex
-    languages: ["py"]
-    patterns:
-      - "\\bfrom\\s+typing\\s+import\\s+\\*"
-    severity: medium
+  - id: ai_high_risk
+    type: ai
+    severity: critical
+    threshold: 0.75
+    description: >
+      Flags files where explainable model predicts >75% AI-likelihood.
+      Intended for high scrutiny on critical or core source files.
 
-  - id: ban-todo-java
-    description: Flag TODO comments in Java files
+  - id: ai_medium_risk
+    type: ai
+    severity: medium
+    threshold: 0.55
+    description: >
+      Monitors moderate AI similarity. Review manually if logic or comments look machine-generated.
+
+  # --- Security: Regex rules ---
+  - id: hardcoded_secrets
     type: regex
-    languages: ["java"]
+    severity: critical
     patterns:
-      - "TODO"
+      - "API_KEY"
+      - "SECRET"
+      - "PASSWORD"
+      - "PRIVATE_KEY"
+      - "ACCESS_TOKEN"
+      - "Bearer [A-Za-z0-9\\-_.]+"
+
+  - id: insecure_http
+    type: regex
+    severity: high
+    patterns:
+      - "http://"
+
+  - id: eval_or_exec
+    type: regex
+    severity: high
+    patterns:
+      - "\\beval\\("
+      - "\\bexec\\("
+    description: >
+      Detects unsafe dynamic execution of code strings.
+
+  # --- File existence requirements ---
+  - id: require_readme
+    type: file-exists
+    path: README.md
     severity: low
+    description: Ensures a README.md file exists in repo root.
+
+  - id: require_license
+    type: file-exists
+    path: LICENSE
+    severity: low
+
+  # --- Metrics thresholds ---
+  - id: line_length_limit
+    type: metric
+    severity: medium
+    max_lines: 400
+    min_lines: 5
+    description: >
+      Warns if files are unusually short or overly long for maintainability review.
+
+  - id: ai_line_density
+    type: metric
+    severity: medium
+    max_ai_percentage: 60
+    description: >
+      Ensures AI-generated content remains below 60% of total lines per PR.
