@@ -23,7 +23,7 @@ jobs:
 
      - name: Call server
        run: |
-         curl -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
+         curl --fail -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
                   -X POST https://blackbox-labs.org/audit \
                   -d "{\"branch\":\"${{ github.event.inputs.branch }}\"}"
 
