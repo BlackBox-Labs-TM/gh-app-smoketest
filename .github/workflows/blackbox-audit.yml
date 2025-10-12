@@ -27,5 +27,5 @@ jobs:
                   -X POST https://blackbox-labs.org/audit \
                   -d "{\"branch\":\"${{ github.event.inputs.branch }}\"}")
          echo "Response code: $status"
-         [ "$status -eq 200 ]
+         [ "$status" -eq 200 ]
 
