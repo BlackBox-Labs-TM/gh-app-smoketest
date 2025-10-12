@@ -23,7 +23,8 @@ jobs:
 
      - name: Call server
        run: |
-         status=$(curl -o response.txt -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
+         status=$(curl -o /dev/null -w "%{http_code}"\
+                  -H "Authorization: Bearer ${{ steps.get-token.outputs.jwt }}" \
                   -X POST https://blackbox-labs.org/audit \
                   -d "{\"branch\":\"${{ github.event.inputs.branch }}\"}")
          echo "Response code: $status"
