@@ -29,6 +29,31 @@ rules:
       - "ACCESS_TOKEN"
       - "Bearer [A-Za-z0-9\\-_.]+"
 
+  - id: aws_access_key
+    type: regex
+    severity: critical
+    patterns:
+      # Matches AWS access keys starting with “AKIA” or “ASIA”
+      - "AKIA[0-9A-Z]{16}"
+      - "ASIA[0-9A-Z]{16}"
+    description: Detects hardcoded AWS access keys.
+
+  - id: openai_api_key
+    type: regex
+    severity: critical
+    patterns:
+      # Matches OpenAI API keys starting with “sk-” followed by 32+ alphanumerics
+      - "sk-[A-Za-z0-9]{32,}"
+    description: Detects hardcoded OpenAI secrets.
+
+  - id: generic_jwt
+    type: regex
+    severity: high
+    patterns:
+      # Very rough match for JWT tokens (three Base64 segments separated by dots)
+      - "ey[A-Za-z0-9_-]{10,}\\.[A-Za-z0-9_-]{10,}\\.[A-Za-z0-9_-]{10,}"
+    description: Detects likely JWT tokens.
+    
   - id: insecure_http
     type: regex
     severity: high
