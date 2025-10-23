@@ -1,0 +1,8 @@
+def main():
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+    fact = 1
+    for i in range(10):
+        fact *= i
+    print(fact)
+    return 123
