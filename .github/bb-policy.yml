@@ -1,0 +1,17 @@
+include_languages:
+  - "python"
+
+rules:
+  - id: hardcoded_secrets
+    type: regex
+    severity: critical
+    patterns:
+      - "API_KEY"
+      - "SECRET"
+      - "PASSWORD"
+      - "PRIVATE_KEY"
+
+  - id: require_license
+    type: file-exists
+    path: LICENSE
+    severity: low
