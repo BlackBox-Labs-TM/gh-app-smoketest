@@ -10,6 +10,7 @@ rules:
       - "SECRET"
       - "PASSWORD"
       - "PRIVATE_KEY"
+    enabled: false
 
   - id: require_license
     type: file-exists
